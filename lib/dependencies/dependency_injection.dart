@@ -6,14 +6,14 @@ import 'package:http/http.dart' as http;
 
 import '../features/domain/repositories/meal_repository.dart';
 
-final getIt = GetIt.instance;
+final sl = GetIt.instance;
 
 void setUp() {
-  getIt.registerLazySingleton(() => http.Client);
-  getIt.registerLazySingleton<MealDataSource>(
-      () => MealDataSourceImpl(getIt.call()));
-  getIt.registerLazySingleton<MealRepository>(
-      () => MealRepositoryImpl(getIt.call()));
-  getIt.registerLazySingleton<GetConcreteMeal>(
-      () => GetConcreteMeal(getIt.call()));
+  sl.registerLazySingleton(() => http.Client());
+  sl.registerLazySingleton<MealDataSource>(
+      () => MealDataSourceImpl(sl()));
+  sl.registerLazySingleton<MealRepository>(
+      () => MealRepositoryImpl(sl()));
+  sl.registerLazySingleton<GetConcreteMeal>(
+      () => GetConcreteMeal(sl()));
 }

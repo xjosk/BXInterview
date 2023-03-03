@@ -1,6 +1,10 @@
+import 'package:consumo_api_entrevista/dependencies/dependency_injection.dart';
+import 'package:consumo_api_entrevista/features/pages/meal_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  setUp();
   runApp(const MyApp());
 }
 
@@ -24,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MealPage(),
     );
   }
 }
