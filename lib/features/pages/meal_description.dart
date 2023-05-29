@@ -1,35 +1,32 @@
+import 'package:consumo_api_entrevista/dependencies/dependency_injection.dart';
 import 'package:consumo_api_entrevista/features/domain/entities/meal.dart';
 import 'package:consumo_api_entrevista/features/domain/usecases/get_concrete_meal_usecase.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../domain/entities/meal_description.dart';
 
-class MealDescriptionPage extends StatefulWidget {
+class MealDescriptionPage extends ConsumerStatefulWidget {
   const MealDescriptionPage({super.key, required this.meal});
 
   final Meal meal;
 
   @override
-  State<MealDescriptionPage> createState() => _MealDescriptionPageState();
+  MealDescriptionPageState createState() => MealDescriptionPageState();
 }
 
-class _MealDescriptionPageState extends State<MealDescriptionPage> {
-  late final GetIt getIt;
-  late final GetConcreteMeal getConcreteMeal;
+class MealDescriptionPageState extends ConsumerState<MealDescriptionPage> {
   MealDescription? mealDescription;
 
   void getMealDescription() async {
     mealDescription =
-        await getConcreteMeal.getMealDescription(widget.meal.idMeal);
+        await ref.read(getConcreteMeal).getMealDescription(widget.meal.idMeal);
     setState(() {});
   }
 
   @override
   void initState() {
     super.initState();
-    getIt = GetIt.instance;
-    getConcreteMeal = getIt.call();
     getMealDescription();
   }
 
@@ -46,7 +43,7 @@ class _MealDescriptionPageState extends State<MealDescriptionPage> {
               padding: const EdgeInsets.all(20.0),
               child: Column(children: [
                   Image.network(widget.meal.strMealThumb),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                   Text(mealDescription!.strInstruction, textAlign: TextAlign.justify,)
                 ]),
             ),

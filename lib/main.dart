@@ -1,11 +1,12 @@
 import 'package:consumo_api_entrevista/dependencies/dependency_injection.dart';
 import 'package:consumo_api_entrevista/features/pages/meal_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  setUp();
-  runApp(const MyApp());
+  init();
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
